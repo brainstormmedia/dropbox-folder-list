@@ -91,7 +91,7 @@ class Dropbox_Folder_List {
 			$dropbox = ob_get_clean();
 		}
 
-		return $content . $dropbox;
+		return $dropbox . $content;
 	}
 	
 	protected function getFolderListing( $folder ) {
@@ -116,7 +116,7 @@ class Dropbox_Folder_List {
 
 		// Connect to dropbox
 		$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
-		$dropbox = new Dropbox_API( $oauth );
+		$dropbox = new Dropbox_API( $oauth, 'sandbox' );
 		$oauth->setToken( array(
 			'token'        => $token,
 			'token_secret' => $token_secret
@@ -265,7 +265,7 @@ class Dropbox_Folder_List {
 				if ( 2 === intval( get_option( 'dfl_plugin_oauth_state', 1 ) ) ) {
 					try {
 						$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
-						$dropbox = new Dropbox_API( $oauth );
+						$dropbox = new Dropbox_API( $oauth, 'sandbox' );
 						$oauth->setToken( get_option( 'dfl_plugin_oauth_access_tokens' ) );
 						$tokens = $oauth->getAccessToken();
 						update_option( 'dfl_plugin_oauth_state', 3 );
@@ -285,7 +285,7 @@ class Dropbox_Folder_List {
 				if ( 1 === intval( get_option( 'dfl_plugin_oauth_state', 1 ) ) ) {
 					try {
 						$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
-						$dropbox = new Dropbox_API( $oauth );
+						$dropbox = new Dropbox_API( $oauth, 'sandbox' );
 						$tokens = $oauth->getRequestToken();
 						$url = $oauth->getAuthorizeUrl();
 						update_option( 'dfl_plugin_oauth_access_tokens', $tokens );
@@ -300,7 +300,7 @@ class Dropbox_Folder_List {
 				<?php
 				if ( 3 === get_option( 'dfl_plugin_oauth_state' ) && !empty( $tokens ) && is_array( $tokens ) && isset( $tokens['token']) && isset( $tokens['token_secret']) ) {
 					$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
-					$dropbox = new Dropbox_API( $oauth );
+					$dropbox = new Dropbox_API( $oauth, 'sandbox' );
 					update_option( 'dfl_plugin_token_key', $tokens['token'] );
 					update_option( 'dfl_plugin_token_secret', $tokens['token_secret'] );
 					$token = get_option( 'dfl_plugin_token_key' );
@@ -316,7 +316,7 @@ class Dropbox_Folder_List {
 						$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
 					}
 					if ( !is_a( $dropbox, 'Dropbox_API' ) ) {
-						$dropbox = new Dropbox_API( $oauth );
+						$dropbox = new Dropbox_API( $oauth, 'sandbox' );
 					}
 					$oauth->setToken( array(
 						'token'        => $token,
