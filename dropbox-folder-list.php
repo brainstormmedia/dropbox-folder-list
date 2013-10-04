@@ -76,6 +76,7 @@ class Dropbox_Folder_List {
 		
 		// Get the slug of the page
 		$permalink = get_permalink( $post );
+		$permalink = str_replace( home_url() . '/blog', '', $permalink );
 		$permalink = str_replace( home_url(), '', $permalink );
 		$permalink = rtrim( $permalink, '/' );
 
