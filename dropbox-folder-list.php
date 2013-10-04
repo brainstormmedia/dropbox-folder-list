@@ -310,6 +310,12 @@ class Dropbox_Folder_List {
 				<?php // Check for revocation ?>
 				<?php if ( !empty( $token ) && !empty( $token_secret ) ) : ?>
 					<?php
+					if ( !is_a( $oauth, 'Dropbox_OAuth_PEAR' ) ) {
+						$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
+					}
+					if ( !is_a( $dropbox, 'Dropbox_API' ) ) {
+						$dropbox = new Dropbox_API( $oauth );
+					}
 					$oauth->setToken( array(
 						'token'        => $token,
 						'token_secret' => $token_secret
