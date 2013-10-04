@@ -86,10 +86,12 @@ class Dropbox_Folder_List {
 		// If we're connected, then get dropbox libs
 		if ( intval( get_option( 'dfl_plugin_oauth_state', 1 ) ) >= 4 ) {
 			$files = $this->getFolderListing( $permalink );
+			ob_start();
 			include( dirname( __FILE__ ) . '/template-listing.php' );
+			$dropbox = ob_get_clean();
 		}
 
-		return $content;
+		return $content . $dropbox;
 	}
 	
 	protected function getFolderListing( $folder ) {

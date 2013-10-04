@@ -1,5 +1,5 @@
 <?php if ( empty( $files ) ) : ?>
-	<?php _e( 'No files in this folder', 'dfc_plugin' ); ?>
+	<?php // _e( 'No files in this folder', 'dfc_plugin' ); ?>
 <?php else : ?>
 	<ul class="dfc-file-listing">
 		<?php foreach( $files['contents'] as $file ) : ?>
