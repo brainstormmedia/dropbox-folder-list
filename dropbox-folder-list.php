@@ -74,11 +74,6 @@ class Dropbox_Folder_List {
 	public function show_dropbox_folder( $content ) {
 		global $post;
 		
-		// Check for a page type
-		if ( 'page' !== $post->post_type ) {
-			return $content;
-		}
-		
 		// Get the slug of the page
 		$permalink = get_permalink( $post );
 		$permalink = str_replace( home_url(), '', $permalink );
@@ -98,7 +93,7 @@ class Dropbox_Folder_List {
 	protected function getFolderListing( $folder ) {
 
 		// See if the results are cached
-		$transient = get_transient( 'dfl_folder_' . md5( $folder ) );
+		// $transient = get_transient( 'dfl_folder_' . md5( $folder ) );
 		if ( !empty( $transient ) ) {
 			return $transient;
 		}
