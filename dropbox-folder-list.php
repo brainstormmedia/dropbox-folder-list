@@ -10,6 +10,9 @@ Author URI: http://kpayne.me/
 License: GPLv2
 */
 
+set_include_path( dirname( __FILE__ ) . PATH_SEPARATOR . get_include_path() );
+set_include_path( dirname( __FILE__ ) . '/HTTP_OAuth' . PATH_SEPARATOR . get_include_path() );
+
 $dfl_plugin = new Dropbox_Folder_List();
 
 register_activation_hook( __FILE__, array( 'Dropbox_Folder_List', 'activate' ) );
@@ -39,9 +42,9 @@ class Dropbox_Folder_List {
 
 		// Get the dropbox libraries
 		$files = array();
-		set_include_path( get_include_path() . PATH_SEPARATOR . dirname( __FILE__ ) . '/HTTP_OAuth' );
-		require("Dropbox/autoload.php");
-		require("HTTP_OAuth/HTTP/OAuth.php");
+
+		require 'Dropbox/autoload.php';
+		require 'HTTP_OAuth/HTTP/OAuth.php';
 
 		// Oauth bits
 		$token = get_option( 'dfl_plugin_token_key' );
@@ -99,9 +102,9 @@ class Dropbox_Folder_List {
 
 		// Get the dropbox libraries
 		$files = array();
-		set_include_path( get_include_path() . PATH_SEPARATOR . dirname( __FILE__ ) . '/HTTP_OAuth' );
-		require("Dropbox/autoload.php");
-		require("HTTP_OAuth/HTTP/OAuth.php");
+
+		require 'Dropbox/autoload.php';
+		require 'HTTP_OAuth/HTTP/OAuth.php';
 
 		// Oauth bits
 		$token = get_option( 'dfl_plugin_token_key' );
@@ -218,9 +221,9 @@ class Dropbox_Folder_List {
 		}
 
 		// Get the dropbox libraries
-		set_include_path( get_include_path() . PATH_SEPARATOR . dirname( __FILE__ ) . '/HTTP_OAuth' );
-		require("Dropbox/autoload.php");
-		require("HTTP_OAuth/HTTP/OAuth.php");
+
+		require 'Dropbox/autoload.php';
+		require 'HTTP_OAuth/HTTP/OAuth.php';
 
 		// Oauth bits
 		$token = get_option( 'dfl_plugin_token_key' );
