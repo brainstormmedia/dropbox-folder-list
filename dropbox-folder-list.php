@@ -34,7 +34,7 @@ class Dropbox_Folder_List {
 	
 	public function dropbox_template_redirect() {
 		global $wp_query;
-		
+
 		// if this is not a request for dropbox or a singular object then bail
 		if ( !isset( $wp_query->query_vars['dropbox'] ) ) {
 			return;
@@ -54,7 +54,7 @@ class Dropbox_Folder_List {
 
 		// Connect to dropbox
 		$oauth = new Dropbox_OAuth_PEAR( get_option( 'dfl_plugin_consumer_key' ), get_option( 'dfl_plugin_consumer_secret' ) );	
-		$dropbox = new Dropbox_API( $oauth );
+		$dropbox = new Dropbox_API( $oauth, 'sandbox' );
 		$oauth->setToken( array(
 			'token'        => $token,
 			'token_secret' => $token_secret
@@ -66,6 +66,7 @@ class Dropbox_Folder_List {
 			header( 'Content-type: application/octet-stream');
 			header( 'Content-disposition: attachment; filename="' . basename( rtrim( $wp_query->query_vars['dropbox'], '/' ) ) . '"');
 			echo $file;
+			exit;
 		} catch ( Exception $e ) {
 		}
 	}
