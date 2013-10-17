@@ -1,6 +1,7 @@
-<?php if ( empty( $files ) ) : ?>
-	<?php // _e( 'No files in this folder', 'dfc_plugin' ); ?>
-<?php else : ?>
+<?php 
+
+if ( !empty( $files['contents'] ) && !is_admin() ) : ?>
+
 	<div class="dfc-file-listing">
 		<h2>Files</h2>
 		<ul>
@@ -20,4 +21,5 @@
 			<?php endforeach; ?>
 		</ul>
 	</div>
+	
 <?php endif; ?>
